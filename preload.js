@@ -1,0 +1,23 @@
+// preload.js
+const { contextBridge, ipcRenderer } = require('electron')
+const path = require('path')
+// Toutes les APIs Node.js sont disponibles dans le processus de préchargement.
+// Il a la même sandbox qu'une extension Chrome.
+window.addEventListener('DOMContentLoaded', () => {
+    const replaceText = (selector, text) => {
+      const element = document.getElementById(selector)
+      if (element) element.innerText = text
+    }
+  
+    for (const dependency of ['chrome', 'node', 'electron']) {
+      replaceText(`${dependency}-version`, process.versions[dependency])
+    }
+  })
+
+  
+
+contextBridge.exposeInMainWorld('electron', {
+  startDrag: (fileName) => {
+    ipcRenderer.send('ondragstart', path.join(process.cwd(), fileName))
+  }
+})
