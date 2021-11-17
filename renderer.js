@@ -14,6 +14,7 @@ const canvas  = document.getElementById("canvas");
 const click  = document.getElementById("click");
 const res  = document.getElementById("result");
 const context = canvas.getContext('2d');
+
 document.addEventListener("drop", (event) => {
   event.preventDefault();
   event.stopPropagation();
@@ -48,7 +49,8 @@ document.addEventListener("drop", (event) => {
                 context.drawImage(img, 0, 0, img.clientWidth, img.clientHeight);
                 let nAlive = 0;
             }
-            result.innerHTML = ""
+            result.innerHTML = "";
+            click.removeAttribute('disabled');
       }
     }
     if (event.dataTransfer.files[0].type !== "image/svg+xml") {
@@ -56,7 +58,7 @@ document.addEventListener("drop", (event) => {
     }
     if  (event.dataTransfer.files.length !== 1) {
         
-        result.innerHTML = "vous ne pouvez déposer qu'un fichier à la fois"
+        result.innerHTML = "Vous ne pouvez déposer qu'un fichier à la fois"
     }
     else{
         return

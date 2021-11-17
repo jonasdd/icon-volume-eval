@@ -61,8 +61,15 @@ html{
     border-color: #ccc;
 }
 
-.btn-default:hover {
+.btn:hover {
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
+}
+.btn:disabled {
+  color: #747474;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+  user-select: none;
+  cursor: not-allowed;
 }
